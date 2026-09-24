@@ -1,4 +1,4 @@
-```javascript
+
 let treeData;
 
 let currentNode;
@@ -993,4 +993,4 @@ function findPath(
     return null;
 
 }
-```
+
