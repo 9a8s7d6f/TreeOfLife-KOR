@@ -107,28 +107,46 @@ function drawTree() {
     // 최대 깊이까지만 복사
     // ========================================
 
-    function createLimitedNode(node, depth) {
-
-        const newNode = {
-            ...node
-        };
+    const MAX_NODES = 5;
 
 
-        // 최대 깊이에 도달했으면
-        // 더 아래의 children은 제거
+function createLimitedNode(node, depth = 1) {
 
-        if (
-            depth >= MAX_DEPTH ||
-            !node.children ||
-            node.children.length === 0
-        ) {
+    const newNode = {
+        ...node
+    };
 
-            delete newNode.children;
 
-            return newNode;
+    // 현재 노드를 포함해서
+    // 5번째 노드까지 표시
 
-        }
+    if (
+        depth >= MAX_NODES ||
+        !node.children ||
+        node.children.length === 0
+    ) {
 
+        delete newNode.children;
+
+        return newNode;
+
+    }
+
+
+    newNode.children =
+        node.children.map(child => {
+
+            return createLimitedNode(
+                child,
+                depth + 1
+            );
+
+        });
+
+
+    return newNode;
+
+}
 
         // 하위 노드를 재귀적으로 처리
 
@@ -153,7 +171,7 @@ function drawTree() {
     const displayNode =
         createLimitedNode(
             currentNode,
-            0
+            1
         );
 
 
