@@ -241,6 +241,71 @@ const root =
 
     svg.call(zoom);
 
+   // 기존 페이지 버튼 제거
+d3.select("#page-controls").remove();
+
+
+// 하위 분류군이 5개를 초과하는 경우
+if (totalChildren > CHILDREN_PER_PAGE) {
+
+    const totalPages =
+        Math.ceil(
+            totalChildren / CHILDREN_PER_PAGE
+        );
+
+
+    const controls =
+        d3.select("#tree-container")
+            .append("div")
+            .attr("id", "page-controls");
+
+
+    // 이전 페이지
+    if (childrenPage > 0) {
+
+        controls
+            .append("button")
+            .text("← 이전")
+            .on("click", () => {
+
+                childrenPage--;
+
+                drawTree();
+
+            });
+
+    }
+
+
+    // 현재 페이지 표시
+    controls
+        .append("span")
+        .text(
+            ` ${childrenPage + 1} / ${totalPages} `
+        );
+
+
+    // 다음 페이지
+    if (
+        childrenPage <
+        totalPages - 1
+    ) {
+
+        controls
+            .append("button")
+            .text("다음 →")
+            .on("click", () => {
+
+                childrenPage++;
+
+                drawTree();
+
+            });
+
+    }
+
+}
+
 }
 
 
