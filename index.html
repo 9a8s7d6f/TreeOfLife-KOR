@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>생물 계통수</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- D3.js -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+</head>
+
+<body>
+
+<header>
+    <div class="title">
+        <h1>생물 계통수</h1>
+        <p>Phylogenetic Tree Explorer</p>
+    </div>
+
+    <div class="search-area">
+        <input
+            id="search"
+            type="text"
+            placeholder="생물 검색..."
+        >
+        <div id="search-results"></div>
+    </div>
+</header>
+
+
+<main>
+
+    <div class="toolbar">
+
+        <button id="back-button">
+            ← 이전
+        </button>
+
+        <div id="breadcrumb"></div>
+
+    </div>
+
+
+    <section id="tree-container">
+
+        <svg id="tree"></svg>
+
+    </section>
+
+
+    <aside id="info-panel">
+
+        <div id="info-content">
+            <h2>분류군 선택</h2>
+            <p>
+                계통수의 분류군을 클릭 시
+                해당 분류군의 상세 계통으로 이동
+            </p>
+        </div>
+
+    </aside>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
