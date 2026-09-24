@@ -1,1 +1,405 @@
+* {
+    box-sizing: border-box;
+}
 
+body {
+    margin: 0;
+    font-family:
+        "Noto Sans KR",
+        Arial,
+        sans-serif;
+
+    background: #f7f8fa;
+    color: #222;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    height: 72px;
+
+    background: white;
+
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 25px;
+}
+
+
+.title {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+
+.title h1 {
+    margin: 0;
+
+    font-size: 22px;
+}
+
+
+.title p {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-area {
+    position: relative;
+
+    width: 280px;
+}
+
+
+#search {
+    width: 100%;
+
+    padding: 10px 14px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+#search:focus {
+    border-color: #555;
+}
+
+
+#search-results {
+    position: absolute;
+
+    top: 44px;
+
+    left: 0;
+
+    right: 0;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    z-index: 100;
+
+    display: none;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.1);
+}
+
+
+.search-result {
+    padding: 10px 14px;
+
+    cursor: pointer;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+.search-result:hover {
+    background: #f2f2f2;
+}
+
+
+.search-result-name {
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+.search-result-scientific {
+    font-size: 12px;
+
+    color: #888;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    position: relative;
+
+    width: 100vw;
+
+    height: calc(100vh - 72px);
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar {
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 55px;
+
+    background: white;
+
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 0 20px;
+
+    z-index: 10;
+}
+
+
+#back-button {
+    border: 1px solid #ccc;
+
+    background: white;
+
+    padding: 7px 13px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+
+#back-button:hover {
+    background: #f0f0f0;
+}
+
+
+#breadcrumb {
+    font-size: 13px;
+
+    color: #666;
+}
+
+
+.breadcrumb-item {
+    cursor: pointer;
+}
+
+
+.breadcrumb-item:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   TREE
+========================= */
+
+#tree-container {
+    position: absolute;
+
+    top: 55px;
+
+    left: 0;
+
+    right: 330px;
+
+    bottom: 0;
+
+    overflow: hidden;
+
+    background: #fafafa;
+}
+
+
+#tree {
+    width: 100%;
+
+    height: 100%;
+
+    cursor: grab;
+}
+
+
+#tree:active {
+    cursor: grabbing;
+}
+
+
+/* =========================
+   TREE LINKS
+========================= */
+
+.link {
+    fill: none;
+
+    stroke: #aaa;
+
+    stroke-width: 2;
+}
+
+
+/* =========================
+   TREE NODES
+========================= */
+
+.node circle {
+    fill: white;
+
+    stroke: #333;
+
+    stroke-width: 2;
+
+    cursor: pointer;
+}
+
+
+.node:hover circle {
+    fill: #e8f2ff;
+
+    stroke: #2367b1;
+
+    stroke-width: 3;
+}
+
+
+.node text {
+    font-size: 13px;
+
+    pointer-events: none;
+}
+
+
+.node .korean {
+    font-weight: bold;
+}
+
+
+.node .scientific {
+    font-size: 11px;
+
+    fill: #888;
+
+    font-style: italic;
+}
+
+
+/* =========================
+   INFO PANEL
+========================= */
+
+#info-panel {
+    position: absolute;
+
+    top: 55px;
+
+    right: 0;
+
+    bottom: 0;
+
+    width: 330px;
+
+    background: white;
+
+    border-left: 1px solid #ddd;
+
+    padding: 25px;
+
+    overflow-y: auto;
+}
+
+
+#info-content h2 {
+    margin-top: 0;
+
+    font-size: 22px;
+}
+
+
+.info-scientific {
+    color: #777;
+
+    font-style: italic;
+
+    margin-bottom: 20px;
+}
+
+
+.info-rank {
+    display: inline-block;
+
+    background: #eee;
+
+    border-radius: 5px;
+
+    padding: 4px 8px;
+
+    font-size: 12px;
+
+    margin-bottom: 15px;
+}
+
+
+.info-description {
+    line-height: 1.7;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    #tree-container {
+        right: 0;
+        bottom: 250px;
+    }
+
+    #info-panel {
+        top: auto;
+        width: 100%;
+        height: 250px;
+    }
+
+    .search-area {
+        width: 180px;
+    }
+}
