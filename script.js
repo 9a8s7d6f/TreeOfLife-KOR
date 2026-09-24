@@ -85,8 +85,36 @@ function drawTree() {
     const height = container.clientHeight;
 
 
-    const root =
-        d3.hierarchy(currentNode);
+    const totalChildren =
+    currentNode.children
+        ? currentNode.children.length
+        : 0;
+
+
+// 현재 페이지의 시작 위치
+const start =
+    childrenPage * CHILDREN_PER_PAGE;
+
+
+// 현재 페이지에서 보여줄 5개
+const visibleChildren =
+    currentNode.children
+        ? currentNode.children.slice(
+            start,
+            start + CHILDREN_PER_PAGE
+        )
+        : undefined;
+
+
+// 실제 계통수에 표시할 데이터
+const displayNode = {
+    ...currentNode,
+    children: visibleChildren
+};
+
+
+const root =
+    d3.hierarchy(displayNode);
 
 
     const tree =
@@ -222,16 +250,15 @@ function drawTree() {
 
 function selectNode(node) {
 
-    /*
-       하위 분류가 있으면
-       그 안으로 이동
-    */
-
     if (node.children && node.children.length > 0) {
 
         history.push(currentNode);
 
         currentNode = node;
+
+        // 새로운 분류군에 들어오면
+        // 다시 첫 번째 5개부터 표시
+        childrenPage = 0;
 
         drawTree();
 
@@ -240,17 +267,9 @@ function selectNode(node) {
         updateInfo(node);
 
         return;
-
     }
 
-
-    /*
-       하위 분류가 없는 경우
-       이동하지 않고 정보만 표시
-    */
-
     updateInfo(node);
-
 }
 
 
