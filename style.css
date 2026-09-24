@@ -403,3 +403,58 @@ main {
         width: 180px;
     }
 }
+#page-controls {
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: white;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid #ddd;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.08);
+
+    z-index: 20;
+}
+
+
+#page-controls button {
+    border: 1px solid #ccc;
+
+    background: white;
+
+    padding: 6px 12px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+
+#page-controls button:hover {
+    background: #f0f0f0;
+}
+
+
+#page-controls span {
+    font-size: 13px;
+
+    color: #666;
+}
