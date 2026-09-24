@@ -86,97 +86,74 @@ function drawTree() {
 
 
     // ========================================
-    // 최대 표시 깊이
-    // ========================================
-    //
-    // 현재 선택된 노드 = depth 0
-    //
-    // 0 : 현재 노드
-    // 1 : 하위
-    // 2 : 하위의 하위
-    // 3
-    // 4
-    //
-    // 따라서 총 5단계 표시
+    // 현재 선택한 분류군을 포함해서
+    // 총 5단계까지만 표시
     // ========================================
 
-    const MAX_DEPTH = 4;
+    const MAX_LEVEL = 5;
 
 
     // ========================================
-    // 최대 깊이까지만 복사
+    // 화면에 표시할 계통수 만들기
     // ========================================
 
-    const MAX_NODES = 5;
+    function limitTree(node, level) {
+
+        // 원본 데이터를 복사
+        const result = {
+            ...node
+        };
 
 
-function createLimitedNode(node, depth = 1) {
+        // ------------------------------------
+        // 5번째 단계에 도달하면
+        // 더 아래의 children을 제거
+        // ------------------------------------
 
-    const newNode = {
-        ...node
-    };
+        if (
+            level >= MAX_LEVEL ||
+            !node.children ||
+            node.children.length === 0
+        ) {
 
+            delete result.children;
 
-    // 현재 노드를 포함해서
-    // 5번째 노드까지 표시
+            return result;
 
-    if (
-        depth >= MAX_NODES ||
-        !node.children ||
-        node.children.length === 0
-    ) {
-
-        delete newNode.children;
-
-        return newNode;
-
-    }
+        }
 
 
-    newNode.children =
-        node.children.map(child => {
+        // ------------------------------------
+        // 하위 분류군을 계속 복사
+        // ------------------------------------
 
-            return createLimitedNode(
-                child,
-                depth + 1
-            );
-
-        });
-
-
-    return newNode;
-
-}
-
-        // 하위 노드를 재귀적으로 처리
-
-        newNode.children =
+        result.children =
             node.children.map(child => {
 
-                return createLimitedNode(
+                return limitTree(
                     child,
-                    depth + 1
+                    level + 1
                 );
 
             });
 
 
-        return newNode;
+        return result;
 
     }
 
 
-    // 현재 선택된 노드에서 시작
+    // 현재 선택된 분류군을 1단계로 시작
 
     const displayNode =
-        createLimitedNode(
+        limitTree(
             currentNode,
             1
         );
 
 
     // ========================================
-    // D3 계층 구조 생성
+    // D3 계층 구조
     // ========================================
 
     const root =
@@ -315,7 +292,7 @@ function createLimitedNode(node, depth = 1) {
         )
         .text(
             d =>
-                d.data.name
+                d.data.name || ""
         );
 
 
@@ -379,7 +356,7 @@ function createLimitedNode(node, depth = 1) {
 
 function selectNode(node) {
 
-    // 하위 분류군이 있는 경우
+    // 하위 분류군이 있으면 이동
 
     if (
         node.children &&
@@ -393,25 +370,21 @@ function selectNode(node) {
         );
 
 
-        // 선택한 노드를 새로운 현재 위치로 설정
+        // 새로운 현재 위치
 
         currentNode =
             node;
 
 
-        // 새로운 계통수 그리기
+        // 새 계통수 표시
 
         drawTree();
-
-
-        // UI 업데이트
 
         updateBreadcrumb();
 
         updateInfo(
             currentNode
         );
-
 
         return;
 
@@ -792,8 +765,6 @@ function openSearchResult(node) {
         "";
 
 
-    // 검색한 생물까지의 경로 찾기
-
     const path =
         findPath(
             treeData,
@@ -808,15 +779,11 @@ function openSearchResult(node) {
     }
 
 
-    // 검색한 노드를 현재 위치로 설정
-
     currentNode =
         path[
             path.length - 1
         ];
 
-
-    // 조상 경로를 history로 설정
 
     history =
         path.slice(
