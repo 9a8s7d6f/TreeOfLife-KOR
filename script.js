@@ -1,4 +1,3 @@
-
 let treeData;
 
 let currentNode;
@@ -6,9 +5,6 @@ let currentNode;
 let nodeMap = new Map();
 
 let history = [];
-
-
-// ========================================
 
 
 // ========================================
@@ -60,6 +56,7 @@ function buildNodeMap(node) {
         });
 
     }
+
 }
 
 
@@ -75,6 +72,9 @@ function drawTree() {
     const svg =
         d3.select("#tree");
 
+
+    // 기존 계통수 삭제
+
     svg.selectAll("*").remove();
 
 
@@ -86,34 +86,36 @@ function drawTree() {
 
 
     // ========================================
-    // 현재 선택한 분류군부터
-    // 최대 5단계까지만 표시
+    // 최대 표시 깊이
+    // ========================================
+    //
+    // 현재 선택된 노드 = depth 0
+    //
+    // 0 : 현재 노드
+    // 1 : 하위
+    // 2 : 하위의 하위
+    // 3
+    // 4
+    //
+    // 따라서 총 5단계 표시
     // ========================================
 
     const MAX_DEPTH = 4;
 
 
-    /*
-        현재 노드를 기준으로 새로운 계층 구조를 만든다.
+    // ========================================
+    // 최대 깊이까지만 복사
+    // ========================================
 
-        depth 0 = 현재 선택한 분류군
-        depth 1 = 바로 아래 분류군
-        depth 2 = 그 아래
-        depth 3
-        depth 4
+    function createLimitedNode(node, depth) {
 
-        따라서 총 5개 층이 표시된다.
-    */
-
-    function createLimitedNode(node, depth = 0) {
-
-        const limitedNode = {
+        const newNode = {
             ...node
         };
 
 
-        // 5번째 단계까지 도달했다면
-        // 더 이상 하위 노드를 넣지 않는다.
+        // 최대 깊이에 도달했으면
+        // 더 아래의 children은 제거
 
         if (
             depth >= MAX_DEPTH ||
@@ -121,38 +123,42 @@ function drawTree() {
             node.children.length === 0
         ) {
 
-            delete limitedNode.children;
+            delete newNode.children;
 
-            return limitedNode;
+            return newNode;
 
         }
 
 
-        // 하위 분류군을 재귀적으로 처리
+        // 하위 노드를 재귀적으로 처리
 
-        limitedNode.children =
-            node.children.map(
-                child =>
-                    createLimitedNode(
-                        child,
-                        depth + 1
-                    )
-            );
+        newNode.children =
+            node.children.map(child => {
+
+                return createLimitedNode(
+                    child,
+                    depth + 1
+                );
+
+            });
 
 
-        return limitedNode;
+        return newNode;
 
     }
 
 
+    // 현재 선택된 노드에서 시작
+
     const displayNode =
         createLimitedNode(
-            currentNode
+            currentNode,
+            0
         );
 
 
     // ========================================
-    // D3 계층 구조
+    // D3 계층 구조 생성
     // ========================================
 
     const root =
@@ -247,7 +253,7 @@ function drawTree() {
 
 
     // ========================================
-    // 원
+    // 노드 원
     // ========================================
 
     nodes
@@ -355,20 +361,32 @@ function drawTree() {
 
 function selectNode(node) {
 
+    // 하위 분류군이 있는 경우
+
     if (
         node.children &&
         node.children.length > 0
     ) {
 
+        // 현재 위치 저장
+
         history.push(
             currentNode
         );
+
+
+        // 선택한 노드를 새로운 현재 위치로 설정
 
         currentNode =
             node;
 
 
+        // 새로운 계통수 그리기
+
         drawTree();
+
+
+        // UI 업데이트
 
         updateBreadcrumb();
 
@@ -376,10 +394,13 @@ function selectNode(node) {
             currentNode
         );
 
+
         return;
 
     }
 
+
+    // 더 이상 하위 분류군이 없는 경우
 
     updateInfo(
         node
@@ -389,7 +410,7 @@ function selectNode(node) {
 
 
 // ========================================
-// 이전으로 돌아가기
+// 이전으로
 // ========================================
 
 document
@@ -534,12 +555,6 @@ function goToBreadcrumb(index) {
         );
 
 
-    // Breadcrumb로 이동했으므로
-    // 첫 페이지부터 표시
-
-    childrenPage = 0;
-
-
     drawTree();
 
     updateBreadcrumb();
@@ -594,19 +609,6 @@ function updateInfo(node) {
                     ${node.children.length}
                 </strong>개
             </p>
-
-            ${
-                node.children.length > 5
-                ?
-                `
-                <p style="color:#888; font-size:13px;">
-                    한 번에 최대 5개의
-                    하위 분류군을 표시합니다.
-                </p>
-                `
-                :
-                ""
-            }
             `
             :
             `
@@ -651,8 +653,6 @@ searchInput.addEventListener(
         searchResults.innerHTML = "";
 
 
-        // 검색어가 없으면 닫기
-
         if (!keyword) {
 
             searchResults.style.display =
@@ -665,8 +665,6 @@ searchInput.addEventListener(
 
         const results = [];
 
-
-        // 모든 분류군 검색
 
         for (
             const node of nodeMap.values()
@@ -701,8 +699,6 @@ searchInput.addEventListener(
 
         }
 
-
-        // 최대 10개만 검색 결과에 표시
 
         results
             .slice(
@@ -755,10 +751,8 @@ searchInput.addEventListener(
             );
 
 
-        // 검색 결과가 있으면 표시
-
         searchResults.style.display =
-            results.length > 0
+            results.length
                 ? "block"
                 : "none";
 
@@ -780,7 +774,7 @@ function openSearchResult(node) {
         "";
 
 
-    // 검색된 생물까지의 경로 찾기
+    // 검색한 생물까지의 경로 찾기
 
     const path =
         findPath(
@@ -796,7 +790,7 @@ function openSearchResult(node) {
     }
 
 
-    // 검색된 생물을 현재 위치로 설정
+    // 검색한 노드를 현재 위치로 설정
 
     currentNode =
         path[
@@ -804,18 +798,13 @@ function openSearchResult(node) {
         ];
 
 
-    // 검색 결과의 조상들을 history에 저장
+    // 조상 경로를 history로 설정
 
     history =
         path.slice(
             0,
             -1
         );
-
-
-    // 검색 결과는 항상 첫 페이지
-
-    childrenPage = 0;
 
 
     drawTree();
@@ -886,4 +875,3 @@ function findPath(
     return null;
 
 }
-
