@@ -1,1 +1,335 @@
 
+
+{
+    "id": "life",
+    "name": "생물",
+    "scientificName": "Biota",
+    "rank": "최상위 분류군",
+    "description": "지구상의 생물들을 계통적으로 탐색합니다.",
+    "children": [
+
+        {
+            "id": "bacteria",
+            "name": "세균",
+            "scientificName": "Bacteria",
+            "rank": "역",
+            "description": "원핵생물에 속하는 생물군입니다."
+        },
+
+        {
+            "id": "archaea",
+            "name": "고세균",
+            "scientificName": "Archaea",
+            "rank": "역",
+            "description": "세균과 형태적으로 비슷하지만 분자생물학적으로 구별되는 생물군입니다."
+        },
+
+        {
+            "id": "eukaryota",
+            "name": "진핵생물",
+            "scientificName": "Eukaryota",
+            "rank": "역",
+            "description": "세포 안에 핵을 가지는 생물들을 포함합니다.",
+            "children": [
+
+                {
+                    "id": "plantae",
+                    "name": "식물",
+                    "scientificName": "Plantae",
+                    "rank": "계",
+                    "description": "광합성을 하는 다양한 다세포 생물을 포함합니다."
+                },
+
+                {
+                    "id": "fungi",
+                    "name": "균류",
+                    "scientificName": "Fungi",
+                    "rank": "계",
+                    "description": "효모, 곰팡이, 버섯 등을 포함하는 생물군입니다."
+                },
+
+                {
+                    "id": "animalia",
+                    "name": "동물",
+                    "scientificName": "Animalia",
+                    "rank": "계",
+                    "description": "다세포성 진핵생물의 주요 계통군입니다.",
+
+                    "children": [
+
+                        {
+                            "id": "porifera",
+                            "name": "해면동물",
+                            "scientificName": "Porifera",
+                            "rank": "문",
+                            "description": "해면동물을 포함하는 동물군입니다."
+                        },
+
+                        {
+                            "id": "cnidaria",
+                            "name": "자포동물",
+                            "scientificName": "Cnidaria",
+                            "rank": "문",
+                            "description": "해파리, 산호, 말미잘 등을 포함합니다."
+                        },
+
+                        {
+                            "id": "bilateria",
+                            "name": "좌우대칭동물",
+                            "scientificName": "Bilateria",
+                            "rank": "분류군",
+                            "description": "좌우대칭성을 기본적인 특징으로 하는 동물 계통군입니다.",
+
+                            "children": [
+
+                                {
+                                    "id": "protostomia",
+                                    "name": "선구동물",
+                                    "scientificName": "Protostomia",
+                                    "rank": "분류군",
+                                    "description": "절지동물, 연체동물 등을 포함하는 주요 동물 계통군입니다.",
+
+                                    "children": [
+
+                                        {
+                                            "id": "arthropoda",
+                                            "name": "절지동물",
+                                            "scientificName": "Arthropoda",
+                                            "rank": "문",
+                                            "description": "곤충, 거미, 갑각류 등을 포함합니다.",
+
+                                            "children": [
+
+                                                {
+                                                    "id": "insecta",
+                                                    "name": "곤충",
+                                                    "scientificName": "Insecta",
+                                                    "rank": "강",
+                                                    "description": "절지동물 중 세 쌍의 다리를 가지는 주요 동물군입니다.",
+
+                                                    "children": [
+
+                                                        {
+                                                            "id": "coleoptera",
+                                                            "name": "딱정벌레목",
+                                                            "scientificName": "Coleoptera",
+                                                            "rank": "목",
+                                                            "description": "딱정벌레, 무당벌레 등을 포함합니다."
+                                                        },
+
+                                                        {
+                                                            "id": "lepidoptera",
+                                                            "name": "나비목",
+                                                            "scientificName": "Lepidoptera",
+                                                            "rank": "목",
+                                                            "description": "나비와 나방을 포함합니다."
+                                                        },
+
+                                                        {
+                                                            "id": "diptera",
+                                                            "name": "파리목",
+                                                            "scientificName": "Diptera",
+                                                            "rank": "목",
+                                                            "description": "파리, 모기 등을 포함합니다."
+                                                        }
+
+                                                    ]
+                                                }
+
+                                            ]
+                                        },
+
+                                        {
+                                            "id": "mollusca",
+                                            "name": "연체동물",
+                                            "scientificName": "Mollusca",
+                                            "rank": "문",
+                                            "description": "달팽이, 조개, 오징어, 문어 등을 포함합니다.",
+
+                                            "children": [
+
+                                                {
+                                                    "id": "gastropoda",
+                                                    "name": "복족강",
+                                                    "scientificName": "Gastropoda",
+                                                    "rank": "강",
+                                                    "description": "달팽이와 민달팽이 등을 포함합니다."
+                                                },
+
+                                                {
+                                                    "id": "cephalopoda",
+                                                    "name": "두족강",
+                                                    "scientificName": "Cephalopoda",
+                                                    "rank": "강",
+                                                    "description": "문어, 오징어, 앵무조개 등을 포함합니다."
+                                                }
+
+                                            ]
+                                        }
+
+                                    ]
+                                },
+
+                                {
+                                    "id": "deuterostomia",
+                                    "name": "후구동물",
+                                    "scientificName": "Deuterostomia",
+                                    "rank": "분류군",
+                                    "description": "극피동물과 척삭동물 등을 포함하는 주요 동물 계통군입니다.",
+
+                                    "children": [
+
+                                        {
+                                            "id": "echinodermata",
+                                            "name": "극피동물",
+                                            "scientificName": "Echinodermata",
+                                            "rank": "문",
+                                            "description": "불가사리, 성게 등을 포함합니다."
+                                        },
+
+                                        {
+                                            "id": "chordata",
+                                            "name": "척삭동물",
+                                            "scientificName": "Chordata",
+                                            "rank": "문",
+                                            "description": "척삭을 발생 과정에서 가지는 동물들을 포함합니다.",
+
+                                            "children": [
+
+                                                {
+                                                    "id": "vertebrata",
+                                                    "name": "척추동물",
+                                                    "scientificName": "Vertebrata",
+                                                    "rank": "아문",
+                                                    "description": "척추를 가지는 동물들을 포함합니다.",
+
+                                                    "children": [
+
+                                                        {
+                                                            "id": "mammalia",
+                                                            "name": "포유류",
+                                                            "scientificName": "Mammalia",
+                                                            "rank": "강",
+                                                            "description": "젖샘을 비롯한 포유류의 특징을 가지는 척추동물입니다.",
+
+                                                            "children": [
+
+                                                                {
+                                                                    "id": "primates",
+                                                                    "name": "영장목",
+                                                                    "scientificName": "Primates",
+                                                                    "rank": "목",
+                                                                    "description": "원숭이류와 여우원숭이류, 사람 등을 포함합니다.",
+
+                                                                    "children": [
+
+                                                                        {
+                                                                            "id": "hominidae",
+                                                                            "name": "사람과",
+                                                                            "scientificName": "Hominidae",
+                                                                            "rank": "과",
+                                                                            "description": "현생 사람과 유인원 등을 포함합니다.",
+
+                                                                            "children": [
+
+                                                                                {
+                                                                                    "id": "homo",
+                                                                                    "name": "사람속",
+                                                                                    "scientificName": "Homo",
+                                                                                    "rank": "속",
+                                                                                    "description": "현생 인류와 여러 멸종 인류를 포함하는 속입니다.",
+
+                                                                                    "children": [
+
+                                                                                        {
+                                                                                            "id": "homo-sapiens",
+                                                                                            "name": "현생인류",
+                                                                                            "scientificName": "Homo sapiens",
+                                                                                            "rank": "종",
+                                                                                            "description": "현재 지구상에 생존하는 사람의 종입니다."
+                                                                                        }
+
+                                                                                    ]
+                                                                                }
+
+                                                                            ]
+                                                                        }
+
+                                                                    ]
+                                                                },
+
+                                                                {
+                                                                    "id": "carnivora",
+                                                                    "name": "식육목",
+                                                                    "scientificName": "Carnivora",
+                                                                    "rank": "목",
+                                                                    "description": "고양이과, 개과, 곰과 등을 포함합니다.",
+
+                                                                    "children": [
+
+                                                                        {
+                                                                            "id": "felidae",
+                                                                            "name": "고양이과",
+                                                                            "scientificName": "Felidae",
+                                                                            "rank": "과",
+                                                                            "description": "고양이, 사자, 호랑이 등을 포함합니다."
+                                                                        },
+
+                                                                        {
+                                                                            "id": "canidae",
+                                                                            "name": "개과",
+                                                                            "scientificName": "Canidae",
+                                                                            "rank": "과",
+                                                                            "description": "개, 늑대, 여우 등을 포함합니다."
+                                                                        }
+
+                                                                    ]
+                                                                }
+
+                                                            ]
+                                                        },
+
+                                                        {
+                                                            "id": "aves",
+                                                            "name": "조류",
+                                                            "scientificName": "Aves",
+                                                            "rank": "강",
+                                                            "description": "깃털을 가지는 현생 공룡 계통군입니다."
+                                                        },
+
+                                                        {
+                                                            "id": "amphibia",
+                                                            "name": "양서류",
+                                                            "scientificName": "Amphibia",
+                                                            "rank": "강",
+                                                            "description": "개구리, 도롱뇽 등을 포함합니다."
+                                                        },
+
+                                                        {
+                                                            "id": "reptilia",
+                                                            "name": "파충류",
+                                                            "scientificName": "Reptilia",
+                                                            "rank": "강",
+                                                            "description": "거북, 뱀, 도마뱀, 악어 등을 포함하는 계통군입니다."
+                                                        }
+
+                                                    ]
+                                                }
+
+                                            ]
+                                        }
+
+                                    ]
+                                }
+
+                            ]
+                        }
+
+                    ]
+                }
+
+            ]
+        }
+
+    ]
+}
