@@ -565,24 +565,17 @@ function openSearchResult(node) {
 function findPath(node, targetId) {
 
     if (node.id === targetId) {
-
         return [node];
-
     }
-
 
     if (!node.children) {
-
         return null;
-
     }
-
 
     for (const child of node.children) {
 
         const result =
             findPath(child, targetId);
-
 
         if (result) {
 
@@ -595,7 +588,5 @@ function findPath(node, targetId) {
 
     }
 
-
     return null;
-
 }
