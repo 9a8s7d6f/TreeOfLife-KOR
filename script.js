@@ -9,14 +9,6 @@ let history = [];
 
 
 // ========================================
-// 한 화면에 표시할 하위 분류군 수
-// ========================================
-
-const CHILDREN_PER_PAGE = 5;
-
-
-// 현재 하위 분류군 페이지
-let childrenPage = 0;
 
 
 // ========================================
@@ -83,9 +75,6 @@ function drawTree() {
     const svg =
         d3.select("#tree");
 
-
-    // 기존 계통수 제거
-
     svg.selectAll("*").remove();
 
 
@@ -97,84 +86,79 @@ function drawTree() {
 
 
     // ========================================
-    // 현재 분류군의 하위 분류군 수
+    // 현재 선택한 분류군부터
+    // 최대 5단계까지만 표시
     // ========================================
 
-    const totalChildren =
-        currentNode.children
-            ? currentNode.children.length
-            : 0;
+    const MAX_DEPTH = 4;
 
 
-    // ========================================
-    // 현재 페이지 계산
-    // ========================================
+    /*
+        현재 노드를 기준으로 새로운 계층 구조를 만든다.
 
-    const totalPages =
-        Math.max(
-            1,
-            Math.ceil(
-                totalChildren / CHILDREN_PER_PAGE
-            )
+        depth 0 = 현재 선택한 분류군
+        depth 1 = 바로 아래 분류군
+        depth 2 = 그 아래
+        depth 3
+        depth 4
+
+        따라서 총 5개 층이 표시된다.
+    */
+
+    function createLimitedNode(node, depth = 0) {
+
+        const limitedNode = {
+            ...node
+        };
+
+
+        // 5번째 단계까지 도달했다면
+        // 더 이상 하위 노드를 넣지 않는다.
+
+        if (
+            depth >= MAX_DEPTH ||
+            !node.children ||
+            node.children.length === 0
+        ) {
+
+            delete limitedNode.children;
+
+            return limitedNode;
+
+        }
+
+
+        // 하위 분류군을 재귀적으로 처리
+
+        limitedNode.children =
+            node.children.map(
+                child =>
+                    createLimitedNode(
+                        child,
+                        depth + 1
+                    )
+            );
+
+
+        return limitedNode;
+
+    }
+
+
+    const displayNode =
+        createLimitedNode(
+            currentNode
         );
 
 
-    // 페이지가 범위를 벗어나지 않도록 조정
-
-    if (childrenPage >= totalPages) {
-
-        childrenPage =
-            totalPages - 1;
-
-    }
-
-    if (childrenPage < 0) {
-
-        childrenPage = 0;
-
-    }
-
-
     // ========================================
-    // 현재 페이지의 시작 위치
-    // ========================================
-
-    const start =
-        childrenPage * CHILDREN_PER_PAGE;
-
-
-    // ========================================
-    // 현재 페이지에서 보여줄 하위 분류군
-    // ========================================
-
-    const visibleChildren =
-        currentNode.children
-            ? currentNode.children.slice(
-                start,
-                start + CHILDREN_PER_PAGE
-            )
-            : undefined;
-
-
-    // ========================================
-    // 화면에 표시할 데이터
-    // ========================================
-
-    const displayNode = {
-
-        ...currentNode,
-
-        children: visibleChildren
-
-    };
-
-
-    // ========================================
-    // D3 계층 구조 생성
+    // D3 계층 구조
     // ========================================
 
     const root =
-        d3.hierarchy(displayNode);
+        d3.hierarchy(
+            displayNode
+        );
 
 
     // ========================================
@@ -210,10 +194,15 @@ function drawTree() {
 
     group
         .selectAll(".link")
-        .data(root.links())
+        .data(
+            root.links()
+        )
         .enter()
         .append("path")
-        .attr("class", "link")
+        .attr(
+            "class",
+            "link"
+        )
         .attr(
             "d",
             d3.linkHorizontal()
@@ -229,43 +218,57 @@ function drawTree() {
     const nodes =
         group
             .selectAll(".node")
-            .data(root.descendants())
+            .data(
+                root.descendants()
+            )
             .enter()
             .append("g")
-            .attr("class", "node")
+            .attr(
+                "class",
+                "node"
+            )
             .attr(
                 "transform",
-                d => `translate(${d.y},${d.x})`
+                d =>
+                    `translate(${d.y},${d.x})`
             )
-            .on("click", function(event, d) {
+            .on(
+                "click",
+                function(event, d) {
 
-                event.stopPropagation();
+                    event.stopPropagation();
 
-                selectNode(d.data);
+                    selectNode(
+                        d.data
+                    );
 
-            });
+                }
+            );
 
 
     // ========================================
-    // 노드 원
+    // 원
     // ========================================
 
     nodes
         .append("circle")
-        .attr("r", d => {
+        .attr(
+            "r",
+            d => {
 
-            if (
-                d.data.id ===
-                currentNode.id
-            ) {
+                if (
+                    d.data.id ===
+                    currentNode.id
+                ) {
 
-                return 9;
+                    return 9;
+
+                }
+
+                return 6;
 
             }
-
-            return 6;
-
-        });
+        );
 
 
     // ========================================
@@ -287,7 +290,8 @@ function drawTree() {
             "-2"
         )
         .text(
-            d => d.data.name
+            d =>
+                d.data.name
         );
 
 
@@ -338,101 +342,9 @@ function drawTree() {
             );
 
 
-    svg.call(zoom);
-
-
-    // ========================================
-    // 기존 페이지 버튼 제거
-    // ========================================
-
-    d3.select(
-        "#page-controls"
-    ).remove();
-
-
-    // ========================================
-    // 하위 분류군이 5개 초과하면
-    // 페이지 버튼 표시
-    // ========================================
-
-    if (
-        totalChildren >
-        CHILDREN_PER_PAGE
-    ) {
-
-        const controls =
-            d3.select(
-                "#tree-container"
-            )
-            .append("div")
-            .attr(
-                "id",
-                "page-controls"
-            );
-
-
-        // ====================================
-        // 이전 버튼
-        // ====================================
-
-        if (
-            childrenPage > 0
-        ) {
-
-            controls
-                .append("button")
-                .text("← 이전")
-                .on(
-                    "click",
-                    () => {
-
-                        childrenPage--;
-
-                        drawTree();
-
-                    }
-                );
-
-        }
-
-
-        // ====================================
-        // 페이지 번호
-        // ====================================
-
-        controls
-            .append("span")
-            .text(
-                `${childrenPage + 1} / ${totalPages}`
-            );
-
-
-        // ====================================
-        // 다음 버튼
-        // ====================================
-
-        if (
-            childrenPage <
-            totalPages - 1
-        ) {
-
-            controls
-                .append("button")
-                .text("다음 →")
-                .on(
-                    "click",
-                    () => {
-
-                        childrenPage++;
-
-                        drawTree();
-
-                    }
-                );
-
-        }
-
-    }
+    svg.call(
+        zoom
+    );
 
 }
 
@@ -443,30 +355,17 @@ function drawTree() {
 
 function selectNode(node) {
 
-    // 하위 분류군이 있는 경우
-
     if (
         node.children &&
         node.children.length > 0
     ) {
 
-        // 현재 위치를 기록
-
         history.push(
             currentNode
         );
 
-
-        // 새로운 위치로 이동
-
         currentNode =
             node;
-
-
-        // 새로운 분류군에 들어왔으므로
-        // 항상 첫 번째 페이지부터 시작
-
-        childrenPage = 0;
 
 
         drawTree();
@@ -482,9 +381,9 @@ function selectNode(node) {
     }
 
 
-    // 하위 분류군이 없는 종/분류군
-
-    updateInfo(node);
+    updateInfo(
+        node
+    );
 
 }
 
@@ -510,12 +409,6 @@ document
 
             currentNode =
                 history.pop();
-
-
-            // 이전 분류군으로 돌아갈 때
-            // 첫 번째 페이지부터 표시
-
-            childrenPage = 0;
 
 
             drawTree();
