@@ -6,6 +6,12 @@ let nodeMap = new Map();
 
 let history = [];
 
+// 한 화면에 표시할 하위 분류군 수
+const CHILDREN_PER_PAGE = 5;
+
+// 현재 하위 분류군 페이지
+let childrenPage = 0;
+
 
 /* =========================
    데이터 불러오기
