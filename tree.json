@@ -6,15 +6,15 @@
     "name": "생물",
     "scientificName": "Biota",
     "rank": "최상위 분류군",
-    "description": "지구상의 생물들을 계통적으로 탐색합니다.",
+    "description": "세포로 이루어진 생물. LUCA(모든 생물의 공통 조상)의 형질을 가진다. -> cellular life, cellular organisms",
     "children": [
 
         {
             "id": "bacteria",
-            "name": "세균",
+            "name": "진정세균",
             "scientificName": "Bacteria",
             "rank": "역",
-            "description": "원핵생물에 속하는 생물군입니다."
+            "description": "핵막과 막성 세포소기관이 없는 원핵생물. 주로 펩티도글리칸 성분의 세포벽을 가지고, 포르밀메싸이오닌을 개시 코돈으로 사용한다. 대부분의 세균이 이에 속한다."
         },
 
         {
@@ -22,7 +22,7 @@
             "name": "고세균",
             "scientificName": "Archaea",
             "rank": "역",
-            "description": "세균과 형태적으로 비슷하지만 분자생물학적으로 구별되는 생물군입니다."
+            "description": "핵막과 막성 세포소기관이 없는 원핵생물. 슈도펩티도글리칸 성분의 세포벽을 가지고, 메싸이오닌을 개시 코돈으로 사용한다. DNA에 인트론과 히스톤 단백질을 포함한다. 주로 극한 환경에서 살아가는 균이 많기에 지구의 옛 환경에서 주로 서식한다 하여 고세균이라는 이름이 붙었다."
         },
 
         {
@@ -30,8 +30,184 @@
             "name": "진핵생물",
             "scientificName": "Eukaryota",
             "rank": "역",
-            "description": "세포 안에 핵을 가지는 생물들을 포함합니다.",
+            "description": "핵막이 존재하는 생물. 아스가르드 고세균(Promethearchaeota)과 알파프로테오박테리아((미토콘드리아), 남세균(엽록체)이 공생하며 이후 고세균 중심의 한 세포로 합쳐져 만들어진것으로 추정한다. 등장시기 : 22억 년 전?",
             "children": [
+                {
+                    "id": "diphoda",
+                    "name": "디포다",
+                    "scientificName": "Diphoda",
+                    "rank": "상군",
+                    "description": "과거 쌍편모생물. 원시색소체생물, SAR 상군, 디스코바 등을 포함한다."
+                },
+                {
+                    "id": "opimoda",
+                    "name": "오피모다",
+                    "scientificName": "Opimoda",
+                    "rank": "상군",
+                    "description": "아모르페아, 플라노모나스, 말라이모나스 등을 포함한다. 아모르페아를 제외한 나머지는 계통 관계가 불분명하다."
+                    "children": [
+                        {
+                            "id": "planomonadida",
+                            "name": "플라노모나스",
+                            "scientificName": "Planomonadida",
+                            "rank": "상군",
+                            "description": "안키로모나스(Ancyromonada)라고도 한다. 계통 관계가 불분명하고, Ancyromonadida(목)이라고도 한다. 엑스카바타(excavata) 측계통에서는 로우코조아(Loukozoa)에 속한다."
+                        },
+                        {
+                            "id": "malawimonads",
+                            "name": "말라이모나스",
+                            "scientificName": "Malawimonads",
+                            "rank": "상군",
+                            "description": "계통 관계가 불분명하다. 엑스카바타(excavata) 측계통에서는 로우코조아(Loukozoa)에 속한다."
+                        },
+                        {
+                            "id": "podiata",
+                            "name": "포디아타",
+                            "scientificName": "Podiata",
+                            "rank": "상군",
+                            "description": "아모르페아와 CRuMs를 포함한다. 위족(Pseudopodia)을 뻗는다."
+                            "children": [
+                                {
+                                    "id": "amorphea",
+                                    "name": "아모르페아",
+                                    "scientificName": "Amorphea",
+                                    "rank": "상군",
+                                    "description": "아메보조아(아메바류)와 무정형생물이라고도 한다."
+                                    "children": [
+                                        {
+                                            "id": "amoebozoa",
+                                            "name": "아메보조아",
+                                            "scientificName": "Amoebozoa",
+                                            "rank": "문",
+                                            "description": "아메바라고도 한다. 이분법으로 번식하고, 무성생식을 기본으로 유성생식을 같이 한다."
+                                            "children": [
+                                            ]
+                                        },
+                                        {
+                                            "id": "obazoa",
+                                            "name": "오바조아",
+                                            "scientificName": "Obazoa",
+                                            "rank": "상군",
+                                            "description": "후소무생물군이라고도 한다. 후편모생물, 소육질생물, 무근단포생물을 한데 이른다."
+                                            "children": [
+                                                {
+                                                    "id": "breviatea",
+                                                    "name": "브레비아타",
+                                                    "scientificName": "Breviatea",
+                                                    "rank": "상군",
+                                                    "description": "소육질생물이라고도 한다."
+                                                    "children": [
+                                                    ]
+                                                },
+                                                {
+                                                    "id": "apusomonad",
+                                                    "name": "아푸소모나드",
+                                                    "scientificName": "Apusomonad",
+                                                    "rank": "상군",
+                                                    "description": "무근단포생물이라고도 한다."
+                                                    "children": [
+                                                    ]
+                                                },
+                                                {
+                                                    "id": "opisthokont",
+                                                    "name": "후편모생물",
+                                                    "scientificName": "Opisthokont",
+                                                    "rank": "상군",
+                                                    "description": "세포의 후방에 달린 단일 편모로 추진력을 만들어 이동하는 진핵생물을 일컫는다."
+                                                    "children": [
+                                                        {
+                                                            "id": "holozoa",
+                                                            "name": "홀로조아",
+                                                            "scientificName": "Holozoa",
+                                                            "rank": "상군",
+                                                            "description": "범동물. 동물과 입금편모충류를 포함한다."
+                                                            "children": [
+                                                                {
+                                                                    "id": "ichthyosporea",
+                                                                    "name": "이크티오스포레아",
+                                                                    "scientificName": "Ichthyosporea",
+                                                                    "rank": "상군",
+                                                                    "description": "메소미케토조아(Mesomycetozoa)라고도 한다."
+                                                                    "children": [
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "id": "pluriformea",
+                                                                    "name": "플루리포르메아",
+                                                                    "scientificName": "Pluriformea",
+                                                                    "rank": "상군",
+                                                                    "description": ""
+                                                                    "children": [
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "id": "filozoa",
+                                                                    "name": "필로조아",
+                                                                    "scientificName": "Filozoa",
+                                                                    "rank": "상군",
+                                                                    "description": "돌사생물이라고도 한다. 필라스테레아, 입금편모충류, 동물을 포함한다."
+                                                                    "children": [
+                                                                        {
+                                                                            "id": "filasterea",
+                                                                            "name": "필라스테레아",
+                                                                            "scientificName": "Filasterea",
+                                                                            "rank": "상군",
+                                                                            "description": "미니스테리아속(Ministeria)과 캅사스포라속(Capsaspora)을 포함한다."
+                                                                            "children": [
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "id": "metazoa-choanoflagellida",
+                                                                            "name": "후생동물-입금편모충",
+                                                                            "scientificName": "Metazoa+Choanoflagellida",
+                                                                            "rank": "상군",
+                                                                            "description": ""
+                                                                            "children": [
+                                                                                {
+                                                                                    "id": "choanoflagellate",
+                                                                                    "name": "입금편모충류",
+                                                                                    "scientificName": "Choanoflagellate",
+                                                                                    "rank": "강",
+                                                                                    "description": "동정편모충 또는 깃편모충이라고도 한다. 동물과 가장 가까운 비동물이다."
+                                                                                    "children": [
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "id": "animalia",
+                                                                                    "name": "동물",
+                                                                                    "scientificName": "Animalia",
+                                                                                    "rank": "계",
+                                                                                    "description": "후생동물(Metazoa)이라고도 한다. "
+                                                                                    "children": [
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "id": "holomycote",
+                                                            "name": "홀로미코타",
+                                                            "scientificName": "Holomycote",
+                                                            "rank": "상군",
+                                                            "description": "범균. 균류(Opisthosporidia)와 크리스티디스코이데아(Cristidiscoidea, 핵형충강)를 포함한다."
+                                                            "children": [
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }   
 
                 {
                     "id": "plantae",
