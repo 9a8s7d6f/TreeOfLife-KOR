@@ -187,10 +187,19 @@ function selectNode(node) {
         return;
     }
 
+
+    // 현재 위치를 기록
+    history.push(currentNode);
+
+
+    // 새로운 위치로 이동
     currentNode = node;
 
+
     drawTree();
+
     updateBreadcrumb();
+
     updateInfo();
 }
 
@@ -203,16 +212,20 @@ document.getElementById("back-button")?.addEventListener(
     "click",
     function() {
 
-        if (
-            currentNode &&
-            currentNode.parent
-        ) {
-            currentNode = currentNode.parent;
-
-            drawTree();
-            updateBreadcrumb();
-            updateInfo();
+        if (history.length === 0) {
+            return;
         }
+
+
+        // 가장 최근 위치로 돌아감
+        currentNode = history.pop();
+
+
+        drawTree();
+
+        updateBreadcrumb();
+
+        updateInfo();
     }
 );
 
