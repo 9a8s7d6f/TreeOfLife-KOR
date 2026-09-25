@@ -2,6 +2,9 @@ let treeData = null;
 let currentNode = null;
 let nodeMap = new Map();
 
+// 뒤로가기 기록
+let history = [];
+
 const MAX_LEVEL = 5;
 
 
@@ -12,10 +15,12 @@ const MAX_LEVEL = 5;
 fetch("tree.json")
     .then(response => response.json())
     .then(data => {
+
         treeData = data;
 
         // 모든 원본 노드를 ID로 저장
         function buildNodeMap(node) {
+
             if (node.id) {
                 nodeMap.set(node.id, node);
             }
@@ -50,12 +55,10 @@ function limitTree(node, level = 1) {
         ...node
     };
 
-    // 현재 노드부터 5번째 노드까지 표시
+    // 5번째 단계까지만 표시
     if (level >= MAX_LEVEL) {
 
-        // 중요:
-        // 화면에서는 하위 노드를 표시하지 않지만
-        // 원본 데이터는 nodeMap에 그대로 존재함
+        // 화면에서는 그 아래를 숨김
         delete result.children;
 
         return result;
@@ -66,7 +69,6 @@ function limitTree(node, level = 1) {
         result.children = node.children.map(child => {
             return limitTree(child, level + 1);
         });
-
     }
 
     return result;
@@ -117,12 +119,14 @@ function drawTree() {
     g.selectAll(".link")
         .data(root.links())
         .enter()
-        .append("line")
+        .append("path")
         .attr("class", "link")
-        .attr("x1", d => d.source.y)
-        .attr("y1", d => d.source.x)
-        .attr("x2", d => d.target.y)
-        .attr("y2", d => d.target.x);
+        .attr(
+            "d",
+            d3.linkHorizontal()
+                .x(d => d.y)
+                .y(d => d.x)
+        );
 
 
     // =========================
@@ -141,11 +145,14 @@ function drawTree() {
         .style("cursor", "pointer")
         .on("click", function(event, d) {
 
-            // 화면에 잘린 5번째 노드도
-            // 원본 데이터를 찾아서 이동할 수 있게 함
+            // 화면에 표시된 복사본이 아니라
+            // 원본 데이터를 찾아서 이동
             let originalNode = d.data;
 
-            if (d.data.id && nodeMap.has(d.data.id)) {
+            if (
+                d.data.id &&
+                nodeMap.has(d.data.id)
+            ) {
                 originalNode = nodeMap.get(d.data.id);
             }
 
@@ -187,19 +194,16 @@ function selectNode(node) {
         return;
     }
 
+    // 현재 위치를 뒤로가기 기록에 저장
+    if (currentNode && currentNode !== node) {
+        history.push(currentNode);
+    }
 
-    // 현재 위치를 기록
-    history.push(currentNode);
-
-
-    // 새로운 위치로 이동
+    // 새로운 위치
     currentNode = node;
 
-
     drawTree();
-
     updateBreadcrumb();
-
     updateInfo();
 }
 
@@ -212,19 +216,16 @@ document.getElementById("back-button")?.addEventListener(
     "click",
     function() {
 
+        // 돌아갈 곳이 없으면 아무것도 하지 않음
         if (history.length === 0) {
             return;
         }
 
-
-        // 가장 최근 위치로 돌아감
+        // 가장 최근 위치를 꺼냄
         currentNode = history.pop();
 
-
         drawTree();
-
         updateBreadcrumb();
-
         updateInfo();
     }
 );
@@ -268,6 +269,12 @@ function updateBreadcrumb() {
         span.addEventListener(
             "click",
             () => {
+
+                // 이미 현재 위치라면 이동하지 않음
+                if (node === currentNode) {
+                    return;
+                }
+
                 selectNode(node);
             }
         );
@@ -386,6 +393,16 @@ if (searchInput) {
 // =========================
 
 function openSearchResult(node) {
+
+    if (!node) {
+        return;
+    }
+
+    // 검색으로 이동할 때는
+    // 기존 뒤로가기 기록을 유지
+    if (currentNode && currentNode !== node) {
+        history.push(currentNode);
+    }
 
     currentNode = node;
 
