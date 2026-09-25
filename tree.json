@@ -44,7 +44,7 @@
                     "name": "오피모다",
                     "scientificName": "Opimoda",
                     "rank": "상군",
-                    "description": "아모르페아, 플라노모나스, 말라이모나스 등을 포함한다. 아모르페아를 제외한 나머지는 계통 관계가 불분명하다."
+                    "description": "아모르페아, 플라노모나스, 말라이모나스 등을 포함한다. 아모르페아를 제외한 나머지는 계통 관계가 불분명하다.",
                     "children": [
                         {
                             "id": "planomonadida",
@@ -65,21 +65,21 @@
                             "name": "포디아타",
                             "scientificName": "Podiata",
                             "rank": "상군",
-                            "description": "아모르페아와 CRuMs를 포함한다. 위족(Pseudopodia)을 뻗는다."
+                            "description": "아모르페아와 CRuMs를 포함한다. 위족(Pseudopodia)을 뻗는다.",
                             "children": [
                                 {
                                     "id": "amorphea",
                                     "name": "아모르페아",
                                     "scientificName": "Amorphea",
                                     "rank": "상군",
-                                    "description": "아메보조아(아메바류)와 무정형생물이라고도 한다."
+                                    "description": "아메보조아(아메바류)와 무정형생물이라고도 한다.",
                                     "children": [
                                         {
                                             "id": "amoebozoa",
                                             "name": "아메보조아",
                                             "scientificName": "Amoebozoa",
                                             "rank": "문",
-                                            "description": "아메바라고도 한다. 이분법으로 번식하고, 무성생식을 기본으로 유성생식을 같이 한다."
+                                            "description": "아메바라고도 한다. 이분법으로 번식하고, 무성생식을 기본으로 유성생식을 같이 한다.",
                                             "children": [
                                             ]
                                         },
@@ -88,14 +88,14 @@
                                             "name": "오바조아",
                                             "scientificName": "Obazoa",
                                             "rank": "상군",
-                                            "description": "후소무생물군이라고도 한다. 후편모생물, 소육질생물, 무근단포생물을 한데 이른다."
+                                            "description": "후소무생물군이라고도 한다. 후편모생물, 소육질생물, 무근단포생물을 한데 이른다.",
                                             "children": [
                                                 {
                                                     "id": "breviatea",
                                                     "name": "브레비아타",
                                                     "scientificName": "Breviatea",
                                                     "rank": "상군",
-                                                    "description": "소육질생물이라고도 한다."
+                                                    "description": "소육질생물이라고도 한다.",
                                                     "children": [
                                                     ]
                                                 },
@@ -104,7 +104,7 @@
                                                     "name": "아푸소모나드",
                                                     "scientificName": "Apusomonad",
                                                     "rank": "상군",
-                                                    "description": "무근단포생물이라고도 한다."
+                                                    "description": "무근단포생물이라고도 한다.",
                                                     "children": [
                                                     ]
                                                 },
@@ -113,21 +113,21 @@
                                                     "name": "후편모생물",
                                                     "scientificName": "Opisthokont",
                                                     "rank": "상군",
-                                                    "description": "세포의 후방에 달린 단일 편모로 추진력을 만들어 이동하는 진핵생물을 일컫는다."
+                                                    "description": "세포의 후방에 달린 단일 편모로 추진력을 만들어 이동하는 진핵생물을 일컫는다.",
                                                     "children": [
                                                         {
                                                             "id": "holozoa",
                                                             "name": "홀로조아",
                                                             "scientificName": "Holozoa",
                                                             "rank": "상군",
-                                                            "description": "범동물. 동물과 입금편모충류를 포함한다."
+                                                            "description": "범동물. 동물과 입금편모충류를 포함한다.",
                                                             "children": [
                                                                 {
                                                                     "id": "ichthyosporea",
                                                                     "name": "이크티오스포레아",
                                                                     "scientificName": "Ichthyosporea",
                                                                     "rank": "상군",
-                                                                    "description": "메소미케토조아(Mesomycetozoa)라고도 한다."
+                                                                    "description": "메소미케토조아(Mesomycetozoa)라고도 한다.",
                                                                     "children": [
                                                                     ]
                                                                 },
@@ -136,7 +136,7 @@
                                                                     "name": "플루리포르메아",
                                                                     "scientificName": "Pluriformea",
                                                                     "rank": "상군",
-                                                                    "description": ""
+                                                                    "description": "",
                                                                     "children": [
                                                                     ]
                                                                 },
@@ -145,14 +145,14 @@
                                                                     "name": "필로조아",
                                                                     "scientificName": "Filozoa",
                                                                     "rank": "상군",
-                                                                    "description": "돌사생물이라고도 한다. 필라스테레아, 입금편모충류, 동물을 포함한다."
+                                                                    "description": "돌사생물이라고도 한다. 필라스테레아, 입금편모충류, 동물을 포함한다.",
                                                                     "children": [
                                                                         {
                                                                             "id": "filasterea",
                                                                             "name": "필라스테레아",
                                                                             "scientificName": "Filasterea",
                                                                             "rank": "상군",
-                                                                            "description": "미니스테리아속(Ministeria)과 캅사스포라속(Capsaspora)을 포함한다."
+                                                                            "description": "미니스테리아속(Ministeria)과 캅사스포라속(Capsaspora)을 포함한다.",
                                                                             "children": [
                                                                             ]
                                                                         },
@@ -161,14 +161,14 @@
                                                                             "name": "후생동물-입금편모충",
                                                                             "scientificName": "Metazoa+Choanoflagellida",
                                                                             "rank": "상군",
-                                                                            "description": ""
+                                                                            "description": "",
                                                                             "children": [
                                                                                 {
                                                                                     "id": "choanoflagellate",
                                                                                     "name": "입금편모충류",
                                                                                     "scientificName": "Choanoflagellate",
                                                                                     "rank": "강",
-                                                                                    "description": "동정편모충 또는 깃편모충이라고도 한다. 동물과 가장 가까운 비동물이다."
+                                                                                    "description": "동정편모충 또는 깃편모충이라고도 한다. 동물과 가장 가까운 비동물이다.",
                                                                                     "children": [
                                                                                     ]
                                                                                 },
@@ -177,8 +177,100 @@
                                                                                     "name": "동물",
                                                                                     "scientificName": "Animalia",
                                                                                     "rank": "계",
-                                                                                    "description": "후생동물(Metazoa)이라고도 한다. "
+                                                                                    "description": "후생동물(Metazoa)이라고도 한다. 배엽을 형성하는 다세포 홀로조아 생물이다.",
                                                                                     "children": [
+                                                                                        {
+                                                                                            "id": "porifera",
+                                                                                            "name": "해면동물",
+                                                                                            "scientificName": "Porifera",
+                                                                                            "rank": "문",
+                                                                                            "description": "Sponge라고도 한다. 무성생식과 유성생식을 둘 다 한다. 유즐동물+파라혹스유전자동물과 근연관계에 대한 논쟁이 있다. 해면동물과 파라혹스유전자동물이 더 가깝다면 유즐동물 - 미리아조아(Myriazoa)로 동물을 나누고 미리아조아 내에 해면동물과 파라혹스유전자동물이 위치한다.",
+                                                                                            "children": [
+                                                                                            
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "id": "eumetazoa",
+                                                                                            "name": "진정후생동물",
+                                                                                            "scientificName": "Eumetazoa",
+                                                                                            "rank": "아계",
+                                                                                            "description": "해면동물을 제외한 동물.",
+                                                                                            "children": [
+                                                                                                {
+                                                                                                    "id": "ctenophora",
+                                                                                                    "name": "유즐동물",
+                                                                                                    "scientificName": "Ctenophora",
+                                                                                                    "rank": "문",
+                                                                                                    "description": "중배엽과 원시 신경 세포가 있다. 과거 자포동물에 속했다가 연구로 인해 새로 분류된 빗해파리류가 이에 속하며 유즐동물이란 단어의 기원이다. 유즐동물+파라혹스유전자동물과 근연관계에 대한 논쟁이 있다. 해면동물과 파라혹스유전자동물이 더 가깝다면 유즐동물 - 미리아조아(Myriazoa)로 동물을 나누고 미리아조아 내에 해면동물과 파라혹스유전자동물이 위치한다.",
+                                                                                                    "children": [
+                                                                                            
+                                                                                                    ]
+                                                                                                },
+                                                                                                {
+                                                                                                    "id": "parahoxozoa",
+                                                                                                    "name": "파라혹스유전자동물",
+                                                                                                    "scientificName": "Parahoxozoa",
+                                                                                                    "rank": "아계",
+                                                                                                    "description": "Hox나 Bmp 유전자 등을 보유한 동물군이다. 물론 이게 있어도 털납작벌레나 자포동물문처럼 비대칭 또는 방사대칭이거나, 유즐동물처럼 이게 없어도 대칭인 동물도 있다.",
+                                                                                                    "children": [
+                                                                                                        {
+                                                                                                            "id": "placozoa",
+                                                                                                            "name": "판형동물",
+                                                                                                            "scientificName": "Placozoa",
+                                                                                                            "rank": "문",
+                                                                                                            "description": "털납작벌레가 이에 속한다.",
+                                                                                                            "children": [
+                                                                                                            ]
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "id": "planulozoa",
+                                                                                                            "name": "플라눌로조아",
+                                                                                                            "scientificName": "Planulozoa",
+                                                                                                            "rank": "아계",
+                                                                                                            "description": "Hox나 Bmp 유전자 등을 보유한 동물군이다. 물론 이게 있어도 털납작벌레나 자포동물문처럼 비대칭 또는 방사대칭이거나, 유즐동물처럼 이게 없어도 대칭인 동물도 있다.",
+                                                                                                            "children": [
+                                                                                                                {
+                                                                                                                    "id": "cnidaria",
+                                                                                                                    "name": "자포동물",
+                                                                                                                    "scientificName": "Cnidaria",
+                                                                                                                    "rank": "문",
+                                                                                                                    "description": "(보통) 자포가 있는 동물이다. 2배엽이고, 폴립이라는 유생기를 거치며, 세포가 분화해 조직이 만들어진다. 해파리와 산호충, 점액포자충을 포함한다.",
+                                                                                                                    "children": [
+                                                                                                                    ]
+                                                                                                                },
+                                                                                                                {
+                                                                                                                    "id": "bilateria",
+                                                                                                                    "name": "좌우대칭동물",
+                                                                                                                    "scientificName": "Bilateria",
+                                                                                                                    "rank": "아계",
+                                                                                                                    "description": "쌍측대칭동물. 몸이 좌우대칭인 동물이다. 몸을 좌우 대칭으로 만드는 Hox 유전자나 Bmp 유전자, let-7 microRNA 등을 다 갖고 있다. ",
+                                                                                                                    "children": [
+                                                                                                                        {
+                                                                                                                            "id": "xenacoelomorpha",
+                                                                                                                            "name": "이무장동물문",
+                                                                                                                            "scientificName": "Xenacoelomorpha",
+                                                                                                                            "rank": "문",
+                                                                                                                            "description": "진무체강형동물문. 무장동물과 이와충을 묶은 분류군.",
+                                                                                                                            "children": [
+                                                                                                                            ]
+                                                                                                                        },
+                                                                                                                        {
+                                                                                                                            "id": "nephrozoan",
+                                                                                                                            "name": "신장동물",
+                                                                                                                            "scientificName": "Nephrozoan",
+                                                                                                                            "rank": "아계",
+                                                                                                                            "description": "배설계를 지닌 동물이다.",
+                                                                                                                            "children": [
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    ]
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }    
+                                                                                            ]
+                                                                                        }
                                                                                     ]
                                                                                 }
                                                                             ]
@@ -206,305 +298,6 @@
                         }
                     ]
                 }
-            ]
-        }   
-
-                {
-                    "id": "plantae",
-                    "name": "식물",
-                    "scientificName": "Plantae",
-                    "rank": "계",
-                    "description": "광합성을 하는 다양한 다세포 생물을 포함합니다."
-                },
-
-                {
-                    "id": "fungi",
-                    "name": "균류",
-                    "scientificName": "Fungi",
-                    "rank": "계",
-                    "description": "효모, 곰팡이, 버섯 등을 포함하는 생물군입니다."
-                },
-
-                {
-                    "id": "animalia",
-                    "name": "동물",
-                    "scientificName": "Animalia",
-                    "rank": "계",
-                    "description": "다세포성 진핵생물의 주요 계통군입니다.",
-
-                    "children": [
-
-                        {
-                            "id": "porifera",
-                            "name": "해면동물",
-                            "scientificName": "Porifera",
-                            "rank": "문",
-                            "description": "해면동물을 포함하는 동물군입니다."
-                        },
-
-                        {
-                            "id": "cnidaria",
-                            "name": "자포동물",
-                            "scientificName": "Cnidaria",
-                            "rank": "문",
-                            "description": "해파리, 산호, 말미잘 등을 포함합니다."
-                        },
-
-                        {
-                            "id": "bilateria",
-                            "name": "좌우대칭동물",
-                            "scientificName": "Bilateria",
-                            "rank": "분류군",
-                            "description": "좌우대칭성을 기본적인 특징으로 하는 동물 계통군입니다.",
-
-                            "children": [
-
-                                {
-                                    "id": "protostomia",
-                                    "name": "선구동물",
-                                    "scientificName": "Protostomia",
-                                    "rank": "분류군",
-                                    "description": "절지동물, 연체동물 등을 포함하는 주요 동물 계통군입니다.",
-
-                                    "children": [
-
-                                        {
-                                            "id": "arthropoda",
-                                            "name": "절지동물",
-                                            "scientificName": "Arthropoda",
-                                            "rank": "문",
-                                            "description": "곤충, 거미, 갑각류 등을 포함합니다.",
-
-                                            "children": [
-
-                                                {
-                                                    "id": "insecta",
-                                                    "name": "곤충",
-                                                    "scientificName": "Insecta",
-                                                    "rank": "강",
-                                                    "description": "절지동물 중 세 쌍의 다리를 가지는 주요 동물군입니다.",
-
-                                                    "children": [
-
-                                                        {
-                                                            "id": "coleoptera",
-                                                            "name": "딱정벌레목",
-                                                            "scientificName": "Coleoptera",
-                                                            "rank": "목",
-                                                            "description": "딱정벌레, 무당벌레 등을 포함합니다."
-                                                        },
-
-                                                        {
-                                                            "id": "lepidoptera",
-                                                            "name": "나비목",
-                                                            "scientificName": "Lepidoptera",
-                                                            "rank": "목",
-                                                            "description": "나비와 나방을 포함합니다."
-                                                        },
-
-                                                        {
-                                                            "id": "diptera",
-                                                            "name": "파리목",
-                                                            "scientificName": "Diptera",
-                                                            "rank": "목",
-                                                            "description": "파리, 모기 등을 포함합니다."
-                                                        }
-
-                                                    ]
-                                                }
-
-                                            ]
-                                        },
-
-                                        {
-                                            "id": "mollusca",
-                                            "name": "연체동물",
-                                            "scientificName": "Mollusca",
-                                            "rank": "문",
-                                            "description": "달팽이, 조개, 오징어, 문어 등을 포함합니다.",
-
-                                            "children": [
-
-                                                {
-                                                    "id": "gastropoda",
-                                                    "name": "복족강",
-                                                    "scientificName": "Gastropoda",
-                                                    "rank": "강",
-                                                    "description": "달팽이와 민달팽이 등을 포함합니다."
-                                                },
-
-                                                {
-                                                    "id": "cephalopoda",
-                                                    "name": "두족강",
-                                                    "scientificName": "Cephalopoda",
-                                                    "rank": "강",
-                                                    "description": "문어, 오징어, 앵무조개 등을 포함합니다."
-                                                }
-
-                                            ]
-                                        }
-
-                                    ]
-                                },
-
-                                {
-                                    "id": "deuterostomia",
-                                    "name": "후구동물",
-                                    "scientificName": "Deuterostomia",
-                                    "rank": "분류군",
-                                    "description": "극피동물과 척삭동물 등을 포함하는 주요 동물 계통군입니다.",
-
-                                    "children": [
-
-                                        {
-                                            "id": "echinodermata",
-                                            "name": "극피동물",
-                                            "scientificName": "Echinodermata",
-                                            "rank": "문",
-                                            "description": "불가사리, 성게 등을 포함합니다."
-                                        },
-
-                                        {
-                                            "id": "chordata",
-                                            "name": "척삭동물",
-                                            "scientificName": "Chordata",
-                                            "rank": "문",
-                                            "description": "척삭을 발생 과정에서 가지는 동물들을 포함합니다.",
-
-                                            "children": [
-
-                                                {
-                                                    "id": "vertebrata",
-                                                    "name": "척추동물",
-                                                    "scientificName": "Vertebrata",
-                                                    "rank": "아문",
-                                                    "description": "척추를 가지는 동물들을 포함합니다.",
-
-                                                    "children": [
-
-                                                        {
-                                                            "id": "mammalia",
-                                                            "name": "포유류",
-                                                            "scientificName": "Mammalia",
-                                                            "rank": "강",
-                                                            "description": "젖샘을 비롯한 포유류의 특징을 가지는 척추동물입니다.",
-
-                                                            "children": [
-
-                                                                {
-                                                                    "id": "primates",
-                                                                    "name": "영장목",
-                                                                    "scientificName": "Primates",
-                                                                    "rank": "목",
-                                                                    "description": "원숭이류와 여우원숭이류, 사람 등을 포함합니다.",
-
-                                                                    "children": [
-
-                                                                        {
-                                                                            "id": "hominidae",
-                                                                            "name": "사람과",
-                                                                            "scientificName": "Hominidae",
-                                                                            "rank": "과",
-                                                                            "description": "현생 사람과 유인원 등을 포함합니다.",
-
-                                                                            "children": [
-
-                                                                                {
-                                                                                    "id": "homo",
-                                                                                    "name": "사람속",
-                                                                                    "scientificName": "Homo",
-                                                                                    "rank": "속",
-                                                                                    "description": "현생 인류와 여러 멸종 인류를 포함하는 속입니다.",
-
-                                                                                    "children": [
-
-                                                                                        {
-                                                                                            "id": "homo-sapiens",
-                                                                                            "name": "현생인류",
-                                                                                            "scientificName": "Homo sapiens",
-                                                                                            "rank": "종",
-                                                                                            "description": "현재 지구상에 생존하는 사람의 종입니다."
-                                                                                        }
-
-                                                                                    ]
-                                                                                }
-
-                                                                            ]
-                                                                        }
-
-                                                                    ]
-                                                                },
-
-                                                                {
-                                                                    "id": "carnivora",
-                                                                    "name": "식육목",
-                                                                    "scientificName": "Carnivora",
-                                                                    "rank": "목",
-                                                                    "description": "고양이과, 개과, 곰과 등을 포함합니다.",
-
-                                                                    "children": [
-
-                                                                        {
-                                                                            "id": "felidae",
-                                                                            "name": "고양이과",
-                                                                            "scientificName": "Felidae",
-                                                                            "rank": "과",
-                                                                            "description": "고양이, 사자, 호랑이 등을 포함합니다."
-                                                                        },
-
-                                                                        {
-                                                                            "id": "canidae",
-                                                                            "name": "개과",
-                                                                            "scientificName": "Canidae",
-                                                                            "rank": "과",
-                                                                            "description": "개, 늑대, 여우 등을 포함합니다."
-                                                                        }
-
-                                                                    ]
-                                                                }
-
-                                                            ]
-                                                        },
-
-                                                        {
-                                                            "id": "aves",
-                                                            "name": "조류",
-                                                            "scientificName": "Aves",
-                                                            "rank": "강",
-                                                            "description": "깃털을 가지는 현생 공룡 계통군입니다."
-                                                        },
-
-                                                        {
-                                                            "id": "amphibia",
-                                                            "name": "양서류",
-                                                            "scientificName": "Amphibia",
-                                                            "rank": "강",
-                                                            "description": "개구리, 도롱뇽 등을 포함합니다."
-                                                        },
-
-                                                        {
-                                                            "id": "reptilia",
-                                                            "name": "파충류",
-                                                            "scientificName": "Reptilia",
-                                                            "rank": "강",
-                                                            "description": "거북, 뱀, 도마뱀, 악어 등을 포함하는 계통군입니다."
-                                                        }
-
-                                                    ]
-                                                }
-
-                                            ]
-                                        }
-
-                                    ]
-                                }
-
-                            ]
-                        }
-
-                    ]
-                }
-
             ]
         }
 
