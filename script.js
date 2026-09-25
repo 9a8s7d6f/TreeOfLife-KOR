@@ -1,862 +1,411 @@
-let treeData;
-
-let currentNode;
-
+let treeData = null;
+let currentNode = null;
 let nodeMap = new Map();
 
-let history = [];
+const MAX_LEVEL = 5;
 
 
-// ========================================
+// =========================
 // 데이터 불러오기
-// ========================================
+// =========================
 
 fetch("tree.json")
     .then(response => response.json())
     .then(data => {
-
         treeData = data;
+
+        // 모든 원본 노드를 ID로 저장
+        function buildNodeMap(node) {
+            if (node.id) {
+                nodeMap.set(node.id, node);
+            }
+
+            if (node.children) {
+                node.children.forEach(child => {
+                    buildNodeMap(child);
+                });
+            }
+        }
 
         buildNodeMap(treeData);
 
         currentNode = treeData;
 
         drawTree();
-
         updateBreadcrumb();
-
-        updateInfo(currentNode);
-
+        updateInfo();
     })
     .catch(error => {
-
-        console.error(error);
-
-        document.getElementById("tree-container")
-            .innerHTML =
-            "<p style='padding:30px'>tree.json을 불러오지 못했습니다.</p>";
-
+        console.error("tree.json 불러오기 실패:", error);
     });
 
 
-// ========================================
-// 모든 노드 등록
-// ========================================
+// =========================
+// 현재 위치에서 5단계까지만 표시
+// =========================
 
-function buildNodeMap(node) {
+function limitTree(node, level = 1) {
 
-    nodeMap.set(node.id, node);
+    const result = {
+        ...node
+    };
 
-    if (node.children) {
+    // 현재 노드부터 5번째 노드까지 표시
+    if (level >= MAX_LEVEL) {
 
-        node.children.forEach(child => {
+        // 중요:
+        // 화면에서는 하위 노드를 표시하지 않지만
+        // 원본 데이터는 nodeMap에 그대로 존재함
+        delete result.children;
 
-            buildNodeMap(child);
+        return result;
+    }
 
+    if (node.children && node.children.length > 0) {
+
+        result.children = node.children.map(child => {
+            return limitTree(child, level + 1);
         });
 
     }
 
+    return result;
 }
 
 
-// ========================================
-// 계통수 그리기
-// ========================================
+// =========================
+// 트리 그리기
+// =========================
 
 function drawTree() {
 
-    const container =
-        document.getElementById("tree-container");
+    const container = document.getElementById("tree");
 
-    const svg =
-        d3.select("#tree");
-
-
-    // 기존 계통수 삭제
-
-    svg.selectAll("*").remove();
-
-
-    const width =
-        container.clientWidth;
-
-    const height =
-        container.clientHeight;
-
-
-    // ========================================
-    // 현재 선택한 분류군을 포함해서
-    // 총 5단계까지만 표시
-    // ========================================
-
-    const MAX_LEVEL = 5;
-
-
-    // ========================================
-    // 화면에 표시할 계통수 만들기
-    // ========================================
-
-    function limitTree(node, level) {
-
-        // 원본 데이터를 복사
-        const result = {
-            ...node
-        };
-
-
-        // ------------------------------------
-        // 5번째 단계에 도달하면
-        // 더 아래의 children을 제거
-        // ------------------------------------
-
-        if (
-            level >= MAX_LEVEL ||
-            !node.children ||
-            node.children.length === 0
-        ) {
-
-            delete result.children;
-
-            return result;
-
-        }
-
-
-        // ------------------------------------
-        // 하위 분류군을 계속 복사
-        // ------------------------------------
-
-        result.children =
-            node.children.map(child => {
-
-                return limitTree(
-                    child,
-                    level + 1
-                );
-
-            });
-
-
-        return result;
-
+    if (!container) {
+        console.error("#tree 요소를 찾을 수 없습니다.");
+        return;
     }
 
+    container.innerHTML = "";
 
-    // 현재 선택된 분류군을 1단계로 시작
+    // 현재 노드부터 정확히 5단계
+    const displayData = limitTree(currentNode, 1);
 
-    const displayNode =
-        limitTree(
-            currentNode,
-            1
-        );
+    const width = 1000;
+    const height = 700;
 
+    const svg = d3.select(container)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-    // ========================================
-    // D3 계층 구조
-    // ========================================
+    const g = svg.append("g")
+        .attr("transform", "translate(100, 50)");
 
-    const root =
-        d3.hierarchy(
-            displayNode
-        );
+    const root = d3.hierarchy(displayData);
 
+    const treeLayout = d3.tree()
+        .size([height - 100, width - 250]);
 
-    // ========================================
-    // 트리 레이아웃
-    // ========================================
-
-    const tree =
-        d3.tree()
-            .size([
-                height - 100,
-                width - 220
-            ]);
+    treeLayout(root);
 
 
-    tree(root);
-
-
-    // ========================================
-    // SVG 그룹
-    // ========================================
-
-    const group =
-        svg.append("g")
-            .attr(
-                "transform",
-                "translate(80, 50)"
-            );
-
-
-    // ========================================
+    // =========================
     // 연결선
-    // ========================================
+    // =========================
 
-    group
-        .selectAll(".link")
-        .data(
-            root.links()
-        )
+    g.selectAll(".link")
+        .data(root.links())
         .enter()
-        .append("path")
-        .attr(
-            "class",
-            "link"
-        )
-        .attr(
-            "d",
-            d3.linkHorizontal()
-                .x(d => d.y)
-                .y(d => d.x)
-        );
+        .append("line")
+        .attr("class", "link")
+        .attr("x1", d => d.source.y)
+        .attr("y1", d => d.source.x)
+        .attr("x2", d => d.target.y)
+        .attr("y2", d => d.target.x);
 
 
-    // ========================================
+    // =========================
     // 노드
-    // ========================================
+    // =========================
 
-    const nodes =
-        group
-            .selectAll(".node")
-            .data(
-                root.descendants()
-            )
-            .enter()
-            .append("g")
-            .attr(
-                "class",
-                "node"
-            )
-            .attr(
-                "transform",
-                d =>
-                    `translate(${d.y},${d.x})`
-            )
-            .on(
-                "click",
-                function(event, d) {
-
-                    event.stopPropagation();
-
-                    selectNode(
-                        d.data
-                    );
-
-                }
-            );
-
-
-    // ========================================
-    // 노드 원
-    // ========================================
-
-    nodes
-        .append("circle")
+    const nodes = g.selectAll(".node")
+        .data(root.descendants())
+        .enter()
+        .append("g")
+        .attr("class", "node")
         .attr(
-            "r",
-            d => {
+            "transform",
+            d => `translate(${d.y}, ${d.x})`
+        )
+        .style("cursor", "pointer")
+        .on("click", function(event, d) {
 
-                if (
-                    d.data.id ===
-                    currentNode.id
-                ) {
+            // 화면에 잘린 5번째 노드도
+            // 원본 데이터를 찾아서 이동할 수 있게 함
+            let originalNode = d.data;
 
-                    return 9;
-
-                }
-
-                return 6;
-
+            if (d.data.id && nodeMap.has(d.data.id)) {
+                originalNode = nodeMap.get(d.data.id);
             }
-        );
+
+            selectNode(originalNode);
+        });
 
 
-    // ========================================
-    // 한국명
-    // ========================================
-
-    nodes
-        .append("text")
-        .attr(
-            "class",
-            "korean"
-        )
-        .attr(
-            "x",
-            12
-        )
-        .attr(
-            "dy",
-            "-2"
-        )
-        .text(
-            d =>
-                d.data.name || ""
-        );
+    nodes.append("circle")
+        .attr("r", 7);
 
 
-    // ========================================
-    // 학명
-    // ========================================
-
-    nodes
-        .append("text")
-        .attr(
-            "class",
-            "scientific"
-        )
-        .attr(
-            "x",
-            12
-        )
-        .attr(
-            "dy",
-            "13"
-        )
-        .text(
-            d =>
-                d.data.scientificName || ""
-        );
+    nodes.append("text")
+        .attr("dx", 12)
+        .attr("dy", 4)
+        .text(d => d.data.name);
 
 
-    // ========================================
-    // 확대 / 축소 / 이동
-    // ========================================
+    // =========================
+    // 줌
+    // =========================
 
-    const zoom =
-        d3.zoom()
-            .scaleExtent([
-                0.3,
-                4
-            ])
-            .on(
-                "zoom",
-                event => {
+    const zoom = d3.zoom()
+        .scaleExtent([0.3, 3])
+        .on("zoom", event => {
+            g.attr("transform", event.transform);
+        });
 
-                    group.attr(
-                        "transform",
-                        event.transform
-                    );
-
-                }
-            );
-
-
-    svg.call(
-        zoom
-    );
-
+    svg.call(zoom);
 }
 
 
-// ========================================
+// =========================
 // 노드 선택
-// ========================================
+// =========================
 
 function selectNode(node) {
 
-    // 하위 분류군이 있으면 이동
-
-    if (
-        node.children &&
-        node.children.length > 0
-    ) {
-
-        // 현재 위치 저장
-
-        history.push(
-            currentNode
-        );
-
-
-        // 새로운 현재 위치
-
-        currentNode =
-            node;
-
-
-        // 새 계통수 표시
-
-        drawTree();
-
-        updateBreadcrumb();
-
-        updateInfo(
-            currentNode
-        );
-
+    if (!node) {
         return;
-
     }
 
-
-    // 더 이상 하위 분류군이 없는 경우
-
-    updateInfo(
-        node
-    );
-
-}
-
-
-// ========================================
-// 이전으로
-// ========================================
-
-document
-    .getElementById("back-button")
-    .addEventListener(
-        "click",
-        () => {
-
-            if (
-                history.length === 0
-            ) {
-
-                return;
-
-            }
-
-
-            currentNode =
-                history.pop();
-
-
-            drawTree();
-
-            updateBreadcrumb();
-
-            updateInfo(
-                currentNode
-            );
-
-        }
-    );
-
-
-// ========================================
-// Breadcrumb
-// ========================================
-
-function updateBreadcrumb() {
-
-    const breadcrumb =
-        document.getElementById(
-            "breadcrumb"
-        );
-
-
-    breadcrumb.innerHTML = "";
-
-
-    const path =
-        [
-            ...history,
-            currentNode
-        ];
-
-
-    path.forEach(
-        (node, index) => {
-
-            const span =
-                document.createElement(
-                    "span"
-                );
-
-
-            span.className =
-                "breadcrumb-item";
-
-
-            span.textContent =
-                node.name;
-
-
-            span.addEventListener(
-                "click",
-                () => {
-
-                    goToBreadcrumb(
-                        index
-                    );
-
-                }
-            );
-
-
-            breadcrumb.appendChild(
-                span
-            );
-
-
-            if (
-                index <
-                path.length - 1
-            ) {
-
-                const separator =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                separator.textContent =
-                    "  ›  ";
-
-
-                separator.style.color =
-                    "#aaa";
-
-
-                breadcrumb.appendChild(
-                    separator
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-// ========================================
-// Breadcrumb 이동
-// ========================================
-
-function goToBreadcrumb(index) {
-
-    const path =
-        [
-            ...history,
-            currentNode
-        ];
-
-
-    currentNode =
-        path[index];
-
-
-    history =
-        path.slice(
-            0,
-            index
-        );
-
+    currentNode = node;
 
     drawTree();
-
     updateBreadcrumb();
-
-    updateInfo(
-        currentNode
-    );
-
+    updateInfo();
 }
 
 
-// ========================================
-// 정보 패널
-// ========================================
+// =========================
+// 뒤로가기
+// =========================
 
-function updateInfo(node) {
+document.getElementById("back-button")?.addEventListener(
+    "click",
+    function() {
 
-    const panel =
-        document.getElementById(
-            "info-content"
-        );
-
-
-    panel.innerHTML = `
-
-        <h2>
-            ${node.name}
-        </h2>
-
-        <div class="info-scientific">
-            ${node.scientificName || ""}
-        </div>
-
-        <div class="info-rank">
-            ${node.rank || ""}
-        </div>
-
-        <p class="info-description">
-            ${
-                node.description ||
-                "설명이 없습니다."
-            }
-        </p>
-
-        ${
-            node.children
-            ?
-            `
-            <p>
-                하위 분류군:
-                <strong>
-                    ${node.children.length}
-                </strong>개
-            </p>
-            `
-            :
-            `
-            <p>
-                더 이상 등록된
-                하위 분류군이 없습니다.
-            </p>
-            `
-        }
-
-    `;
-
-}
-
-
-// ========================================
-// 검색
-// ========================================
-
-const searchInput =
-    document.getElementById(
-        "search"
-    );
-
-
-const searchResults =
-    document.getElementById(
-        "search-results"
-    );
-
-
-searchInput.addEventListener(
-    "input",
-    () => {
-
-        const keyword =
-            searchInput.value
-                .trim()
-                .toLowerCase();
-
-
-        searchResults.innerHTML = "";
-
-
-        if (!keyword) {
-
-            searchResults.style.display =
-                "none";
-
-            return;
-
-        }
-
-
-        const results = [];
-
-
-        for (
-            const node of nodeMap.values()
+        if (
+            currentNode &&
+            currentNode.parent
         ) {
+            currentNode = currentNode.parent;
 
-            const name =
-                (
-                    node.name ||
-                    ""
-                )
-                .toLowerCase();
-
-
-            const scientific =
-                (
-                    node.scientificName ||
-                    ""
-                )
-                .toLowerCase();
-
-
-            if (
-                name.includes(keyword) ||
-                scientific.includes(keyword)
-            ) {
-
-                results.push(
-                    node
-                );
-
-            }
-
+            drawTree();
+            updateBreadcrumb();
+            updateInfo();
         }
-
-
-        results
-            .slice(
-                0,
-                10
-            )
-            .forEach(
-                node => {
-
-                    const result =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    result.className =
-                        "search-result";
-
-
-                    result.innerHTML = `
-
-                        <div class="search-result-name">
-                            ${node.name}
-                        </div>
-
-                        <div class="search-result-scientific">
-                            ${node.scientificName || ""}
-                        </div>
-
-                    `;
-
-
-                    result.addEventListener(
-                        "click",
-                        () => {
-
-                            openSearchResult(
-                                node
-                            );
-
-                        }
-                    );
-
-
-                    searchResults.appendChild(
-                        result
-                    );
-
-                }
-            );
-
-
-        searchResults.style.display =
-            results.length
-                ? "block"
-                : "none";
-
     }
 );
 
 
-// ========================================
-// 검색 결과 열기
-// ========================================
+// =========================
+// Breadcrumb
+// =========================
 
-function openSearchResult(node) {
+function updateBreadcrumb() {
 
-    searchResults.style.display =
-        "none";
+    const breadcrumb =
+        document.getElementById("breadcrumb");
 
-
-    searchInput.value =
-        "";
-
-
-    const path =
-        findPath(
-            treeData,
-            node.id
-        );
-
-
-    if (!path) {
-
+    if (!breadcrumb) {
         return;
-
     }
 
+    const path = [];
 
-    currentNode =
-        path[
-            path.length - 1
-        ];
+    let node = currentNode;
 
+    while (node) {
 
-    history =
-        path.slice(
-            0,
-            -1
+        path.unshift(node);
+
+        node = node.parent;
+    }
+
+    breadcrumb.innerHTML = "";
+
+    path.forEach((node, index) => {
+
+        const span =
+            document.createElement("span");
+
+        span.textContent = node.name;
+
+        span.style.cursor = "pointer";
+
+        span.addEventListener(
+            "click",
+            () => {
+                selectNode(node);
+            }
         );
 
+        breadcrumb.appendChild(span);
 
-    drawTree();
+        if (index < path.length - 1) {
 
-    updateBreadcrumb();
+            const arrow =
+                document.createElement("span");
 
-    updateInfo(
-        currentNode
-    );
+            arrow.textContent = " › ";
 
+            breadcrumb.appendChild(arrow);
+        }
+    });
 }
 
 
-// ========================================
-// 특정 노드까지의 경로 찾기
-// ========================================
+// =========================
+// 정보 패널
+// =========================
 
-function findPath(
-    node,
-    targetId
-) {
+function updateInfo() {
 
-    if (
-        node.id ===
-        targetId
-    ) {
+    const info =
+        document.getElementById("info-content");
 
-        return [
-            node
-        ];
-
+    if (!info || !currentNode) {
+        return;
     }
 
-
-    if (
-        !node.children
-    ) {
-
-        return null;
-
-    }
-
-
-    for (
-        const child
-        of node.children
-    ) {
-
-        const result =
-            findPath(
-                child,
-                targetId
-            );
+    info.innerHTML = `
+        <h2>${currentNode.name || ""}</h2>
+        <p>
+            ${currentNode.description || ""}
+        </p>
+    `;
+}
 
 
-        if (result) {
+// =========================
+// 검색
+// =========================
 
-            return [
-                node,
-                ...result
-            ];
+const searchInput =
+    document.getElementById("search");
 
+const searchResults =
+    document.getElementById("search-results");
+
+
+if (searchInput) {
+
+    searchInput.addEventListener(
+        "input",
+        function() {
+
+            const keyword =
+                this.value.trim().toLowerCase();
+
+            if (!keyword) {
+
+                if (searchResults) {
+                    searchResults.innerHTML = "";
+                }
+
+                return;
+            }
+
+            const results = [];
+
+            nodeMap.forEach(node => {
+
+                if (
+                    node.name &&
+                    node.name
+                        .toLowerCase()
+                        .includes(keyword)
+                ) {
+                    results.push(node);
+                }
+            });
+
+            if (!searchResults) {
+                return;
+            }
+
+            searchResults.innerHTML = "";
+
+            results.slice(0, 20).forEach(node => {
+
+                const item =
+                    document.createElement("div");
+
+                item.textContent = node.name;
+
+                item.style.cursor = "pointer";
+
+                item.addEventListener(
+                    "click",
+                    () => {
+                        openSearchResult(node);
+                    }
+                );
+
+                searchResults.appendChild(item);
+            });
         }
+    );
+}
 
+
+// =========================
+// 검색 결과 열기
+// =========================
+
+function openSearchResult(node) {
+
+    currentNode = node;
+
+    drawTree();
+    updateBreadcrumb();
+    updateInfo();
+
+    if (searchResults) {
+        searchResults.innerHTML = "";
     }
 
+    if (searchInput) {
+        searchInput.value = "";
+    }
+}
 
-    return null;
 
+// =========================
+// 경로 찾기
+// =========================
+
+function findPath(targetNode) {
+
+    const path = [];
+
+    let node = targetNode;
+
+    while (node) {
+
+        path.unshift(node);
+
+        node = node.parent;
+    }
+
+    return path;
 }
