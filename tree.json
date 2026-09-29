@@ -261,6 +261,24 @@
                                                                                                                             "rank": "아계",
                                                                                                                             "description": "배설계를 지닌 동물이다.",
                                                                                                                             "children": [
+                                                                                                                                {
+                                                                                                                                    "id": "protostomia",
+                                                                                                                                    "name": "선구동물",
+                                                                                                                                        "scientificName": "Protostomia",
+                                                                                                                                    "rank": "상문",
+                                                                                                                                    "description": "전구동물 또는 원구동물이라고도 한다. 발생 중 처음 생기는 원구가 입이 되고 다음에 생긴 구멍이 항문이 되는 동물이다.",
+                                                                                                                                    "children": [
+                                                                                                                                    ]
+                                                                                                                                },
+                                                                                                                                {
+                                                                                                                                    "id": "deuterostome",
+                                                                                                                                    "name": "후구동물",
+                                                                                                                                    "scientificName": "Deuterostome",
+                                                                                                                                    "rank": "상문",
+                                                                                                                                    "description": "발생 중 처음 생기는 원구가 항문이 되고 다음에 생긴 구멍이 입이 되는 동물.",
+                                                                                                                                    "children": [
+                                                                                                                                    ]
+                                                                                                                                }
                                                                                                                             ]
                                                                                                                         }
                                                                                                                     ]
