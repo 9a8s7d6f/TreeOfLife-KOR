@@ -277,6 +277,42 @@
                                                                                                                                     "rank": "상문",
                                                                                                                                     "description": "발생 중 처음 생기는 원구가 항문이 되고 다음에 생긴 구멍이 입이 되는 동물.",
                                                                                                                                     "children": [
+                                                                                                                                        {
+                                                                                                                                            "id": "ambulacraria",
+                                                                                                                                            "name": "보대동물",
+                                                                                                                                            "scientificName": "Ambulacraria",
+                                                                                                                                            "rank": "상문",
+                                                                                                                                            "description": "극피동물과 반삭동물을 통들어 이르는 동물군.",
+                                                                                                                                            "children": [
+                                                                                                                                                {
+                                                                                                                                                    "id": "echinoderm",
+                                                                                                                                                    "name": "극피동물문",
+                                                                                                                                                    "scientificName": "Echinoderm",
+                                                                                                                                                    "rank": "문",
+                                                                                                                                                    "description": "체벽에 탄산칼슘으로 이루어진 석회판의 견고한 내골격을 함유하고, 몸이 다섯 부분의 방사 대칭 형태를 띤다.(고대 종은 좌우대칭종이 발견된다.)",
+                                                                                                                                                    "children": [
+                                                                                                                                                    ]
+                                                                                                                                                },
+                                                                                                                                                {
+                                                                                                                                                    "id": "hemichordate",
+                                                                                                                                                    "name": "반삭동물문",
+                                                                                                                                                    "scientificName": "hemichordate",
+                                                                                                                                                    "rank": "문",
+                                                                                                                                                    "description": "의삭류라고도 불린다. 반삭이라 불리는 척삭의 원시형태 신경계가 있으며 몸은 구문부와 금부, 동부로 이루어져 있으며 순환계는 개방형이다. 체강의 형성은 극피동물과 유사하다.",
+                                                                                                                                                    "children": [
+                                                                                                                                                    ]
+                                                                                                                                                }
+                                                                                                                                            ]
+                                                                                                                                        },
+                                                                                                                                        {
+                                                                                                                                            "id": "chordate",
+                                                                                                                                            "name": "척삭동물문",
+                                                                                                                                            "scientificName": "Chordate",
+                                                                                                                                            "rank": "문",
+                                                                                                                                            "description": "텅 빈 배신경삭, 등신경삭, 척삭, 인두열과 내관을 지니고 있으며 항문 뒤에 꼬리가 나 있는 후구동물이다. 선구동물들과 비교하여 신경/순환계 위치가 전후로 뒤집혔다.",
+                                                                                                                                            "children": [
+                                                                                                                                            ]
+                                                                                                                                        }
                                                                                                                                     ]
                                                                                                                                 }
                                                                                                                             ]
