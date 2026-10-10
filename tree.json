@@ -268,6 +268,24 @@
                                                                                                                                     "rank": "상문",
                                                                                                                                     "description": "전구동물 또는 원구동물이라고도 한다. 발생 중 처음 생기는 원구가 입이 되고 다음에 생긴 구멍이 항문이 되는 동물이다.",
                                                                                                                                     "children": [
+                                                                                                                                        {
+                                                                                                                                            "id": "spiralia",
+                                                                                                                                            "name": "나선동물",
+                                                                                                                                            "scientificName": "Spiralia",
+                                                                                                                                            "rank": "상문",
+                                                                                                                                            "description": "전구동물 또는 원구동물이라고도 한다. 발생 중 처음 생기는 원구가 입이 되고 다음에 생긴 구멍이 항문이 되는 동물이다.",
+                                                                                                                                            "children": [
+                                                                                                                                            ]
+                                                                                                                                        },
+                                                                                                                                        {
+                                                                                                                                            "id": "ecdysozoa",
+                                                                                                                                            "name": "탈피동물",
+                                                                                                                                            "scientificName": "Ecdysozoa",
+                                                                                                                                            "rank": "상문",
+                                                                                                                                            "description": "전구동물 또는 원구동물이라고도 한다. 발생 중 처음 생기는 원구가 입이 되고 다음에 생긴 구멍이 항문이 되는 동물이다.",
+                                                                                                                                            "children": [
+                                                                                                                                            ]
+                                                                                                                                        }
                                                                                                                                     ]
                                                                                                                                 },
                                                                                                                                 {
